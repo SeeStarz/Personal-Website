@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/base.css">
+
+    <!-- Theming stylesheets -->
+    <link rel="stylesheet" href="/css/dark.css" class="theme">
+    <link rel="stylesheet" href="/css/dark-mc.css" class="theme" disabled=true>
+    <link rel="stylesheet" href="/css/dark-hc.css" class="theme" disabled=true>
+    <link rel="stylesheet" href="/css/light.css" class="theme" disabled=true>
+    <link rel="stylesheet" href="/css/light-mc.css" class="theme" disabled=true>
+    <link rel="stylesheet" href="/css/light-hc.css" class="theme" disabled=true>
+
+    <script src="main.js" defer></script>
+
+    <!-- Extra page specific headers -->
+    {% block morehead %}{% endblock %}
+  </head>
+  <body>
+    {% block content %}
+    <p>Sorry, this page seems to be empty.</p>
+    {% endblock content %}
+  </body>
+</html>
