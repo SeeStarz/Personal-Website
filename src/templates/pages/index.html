@@ -2,6 +2,23 @@
 {% block title %}SeeStarz's Website{% endblock %}
 
 {% block content %}
-<h1>Title</h1>
-<p>HEHEHEHAW</p>
+{% include 'navbar.html' %}
+<main>
+  <div>
+    <div>
+      {% include 'intro.html' %}
+      {% include 'pwn.html' %}
+      {% include 'system_details.html' %}
+      {% include 'recent_games.html' %}
+      {% include 'active_projects.html' %}
+    </div>
+    <div>
+      {% include 'hyperlinks.html' %}
+      <a href="https://data.typeracer.com/pit/profile?user=mfahrim&ref=badge" target="_top">
+        <img src="https://data.typeracer.com/misc/badge?user=mfahrim" border="0" alt="TypeRacer.com scorecard for user mfahrim"/>
+      </a>
+    </div>
+  </div>
+</main>
+{% include 'footer.html' %}
 {% endblock content %}
