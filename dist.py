@@ -9,7 +9,7 @@ import shutil
 from jinja2 import Environment, FileSystemLoader, select_autoescape, StrictUndefined
 
 TEMPLATE_RENDER_SOURCE='src/templates/pages/'
-TEMPLATE_DIRS=('src/templates/pages/', 'src/templates/components/', 'src/templates/')
+TEMPLATE_DIRS=('src/templates/pages/', 'src/templates/components/')
 COPY_DIRS=('src/css',)
 DEST='dist/'
 
