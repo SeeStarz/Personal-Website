@@ -4,3 +4,65 @@
   --font-sans: "Atkinson Hyperlegible", "Noto Color Emoji";
   --font-mono: "JetBrains Mono"
 }
+
+/*
+ Primary: #B186FC
+ Secondary: #FF9FC3
+ Tertiary: #009DAD
+ Error: #FF5449
+ Neutral: #938F94
+ Neutral Variant: #948E99
+*/
+
+@theme inline {
+  --color-*: initial;
+  --color-primary: var(--md-sys-color-primary);
+  --color-surfacetint: var(--md-sys-color-surface-tint);
+  --color-onprimary: var(--md-sys-color-on-primary);
+  --color-primarycontainer: var(--md-sys-color-primary-container);
+  --color-onprimarycontainer: var(--md-sys-color-on-primary-container);
+  --color-secondary: var(--md-sys-color-secondary);
+  --color-onsecondary: var(--md-sys-color-on-secondary);
+  --color-secondarycontainer: var(--md-sys-color-secondary-container);
+  --color-onsecondarycontainer: var(--md-sys-color-on-secondary-container);
+  --color-tertiary: var(--md-sys-color-tertiary);
+  --color-ontertiary: var(--md-sys-color-on-tertiary);
+  --color-tertiarycontainer: var(--md-sys-color-tertiary-container);
+  --color-ontertiarycontainer: var(--md-sys-color-on-tertiary-container);
+  --color-error: var(--md-sys-color-error);
+  --color-onerror: var(--md-sys-color-on-error);
+  --color-errorcontainer: var(--md-sys-color-error-container);
+  --color-onerrorcontainer: var(--md-sys-color-on-error-container);
+  --color-background: var(--md-sys-color-background);
+  --color-onbackground: var(--md-sys-color-on-background);
+  --color-surface: var(--md-sys-color-surface);
+  --color-onsurface: var(--md-sys-color-on-surface);
+  --color-surfacevariant: var(--md-sys-color-surface-variant);
+  --color-onsurfacevariant: var(--md-sys-color-on-surface-variant);
+  --color-outline: var(--md-sys-color-outline);
+  --color-outlinevariant: var(--md-sys-color-outline-variant);
+  --color-shadow: var(--md-sys-color-shadow);
+  --color-scrim: var(--md-sys-color-scrim);
+  --color-inversesurface: var(--md-sys-color-inverse-surface);
+  --color-inverseonsurface: var(--md-sys-color-inverse-on-surface);
+  --color-inverseprimary: var(--md-sys-color-inverse-primary);
+  --color-primaryfixed: var(--md-sys-color-primary-fixed);
+  --color-onprimaryfixed: var(--md-sys-color-on-primary-fixed);
+  --color-primaryfixeddim: var(--md-sys-color-primary-fixed-dim);
+  --color-onprimaryfixedvariant: var(--md-sys-color-on-primary-fixed-variant);
+  --color-secondaryfixed: var(--md-sys-color-secondary-fixed);
+  --color-onsecondaryfixed: var(--md-sys-color-on-secondary-fixed);
+  --color-secondaryfixeddim: var(--md-sys-color-secondary-fixed-dim);
+  --color-onsecondaryfixedvariant: var(--md-sys-color-on-secondary-fixed-variant);
+  --color-tertiaryfixed: var(--md-sys-color-tertiary-fixed);
+  --color-ontertiaryfixed: var(--md-sys-color-on-tertiary-fixed);
+  --color-tertiaryfixeddim: var(--md-sys-color-tertiary-fixed-dim);
+  --color-ontertiaryfixedvariant: var(--md-sys-color-on-tertiary-fixed-variant);
+  --color-surfacedim: var(--md-sys-color-surface-dim);
+  --color-surfacebright: var(--md-sys-color-surface-bright);
+  --color-surfacecontainerlowest: var(--md-sys-color-surface-container-lowest);
+  --color-surfacecontainerlow: var(--md-sys-color-surface-container-low);
+  --color-surfacecontainer: var(--md-sys-color-surface-container);
+  --color-surfacecontainerhigh: var(--md-sys-color-surface-container-high);
+  --color-surfacecontainerhighest: var(--md-sys-color-surface-container-highest);
+}

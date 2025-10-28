@@ -8,7 +8,7 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/compiled.css">
     <link href='https://fonts.googleapis.com/css?family=Atkinson Hyperlegible' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
     <!-- Extra page specific headers -->
     {% block morehead %}{% endblock %}
   </head>
-  <body>
+  <body class="dark"> 
     {% block content %}
     <p>Sorry, this page seems to be empty.</p>
     {% endblock content %}
