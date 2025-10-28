@@ -1,7 +1,13 @@
-<nav>
-  <ul>
-    <li>Home</li>
-    <li>Blog</li>
-    <li>Portfolio</li>
+<nav class="bg-surfacecontainer h-[110px] flex items-center justify-center">
+  <ul class="flex gap-[20px]">
+    {% with label='Home', state='active' %}
+      {% include 'navbar/button.html' %}
+    {% endwith %}
+    {% with label='Blog' %}
+      {% include 'navbar/button.html' %}
+    {% endwith %}
+    {% with label='Portfolio' %}
+      {% include 'navbar/button.html' %}
+    {% endwith %}
   </ul>
 </nav>
