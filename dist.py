@@ -45,6 +45,8 @@ def main():
         export_directory_name = path.split(dir_)[-1]
         shutil.copytree(dir_, path.join(DEST, export_directory_name))
 
+    print('Done')
+
 def get_context() -> dict:
     context = {}
 
