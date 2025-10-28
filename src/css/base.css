@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Atkinson Hyperlegible", "Noto Color Emoji";
+  --font-mono: "JetBrains Mono"
+}
