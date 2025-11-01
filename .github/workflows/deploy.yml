@@ -5,8 +5,8 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build project
+  build-deploy:
+    name: Build and deploy project
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v5
@@ -25,11 +25,6 @@ jobs:
         run: |
           npx @tailwindcss/cli -i src/css/base.css -o src/css/compiled.css
           python3 dist.py
-  deploy:
-    name: Deploy to VPS
-    runs-on: ubuntu-22.04
-    needs: build
-    steps:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
