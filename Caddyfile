@@ -1,0 +1,4 @@
+https://seestarz.my.id {
+    root * /var/www/personal
+    file_server
+}
