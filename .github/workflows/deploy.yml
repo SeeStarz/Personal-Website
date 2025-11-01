@@ -1,0 +1,46 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build project
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24.9'
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          npm install tailwindcss @tailwindcss/cli
+          pip install -r requirements.txt
+      - name: Build project
+        run: |
+          npx @tailwindcss/cli -i src/css/base.css -o src/css/compiled.css
+          python3 dist.py
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-22.04
+    needs: build
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan "${{ vars.SSH_HOST }}" > ~/.ssh/known_hosts
+      - name: Clean old files
+        run: |
+          ssh "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}" 'rm -r /var/www/personal/* /var/www/personal/.[!.]* /var/www/..?*'
+          scp -r dist/* "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}:/var/www/personal/"
+      - name: Copy files
+        run: |
+          scp Caddyfile "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}:/etc/caddy/personal/Caddyfile"
+          ssh "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}" 'sudo systemctl restart caddy.service'
