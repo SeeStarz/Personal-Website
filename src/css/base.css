@@ -5,6 +5,14 @@
   --font-mono: "JetBrains Mono"
 }
 
+@utility contain-strict {
+  contain: strict;
+}
+
+@utility inset-shadow-8px {
+  box-shadow: inset 0px 0px 8px rgba(0,0,0,0.25);
+}
+
 /*
  Primary: #B186FC
  Secondary: #FF9FC3

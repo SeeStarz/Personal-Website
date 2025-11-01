@@ -1,13 +1,19 @@
-<nav class="bg-surfacecontainer h-[110px] flex items-center justify-center">
-  <ul class="flex gap-[20px]">
-    {% with label='Home', state='active' %}
-      {% include 'navbar/button.html' %}
-    {% endwith %}
-    {% with label='Blog' %}
-      {% include 'navbar/button.html' %}
-    {% endwith %}
-    {% with label='Portfolio' %}
-      {% include 'navbar/button.html' %}
-    {% endwith %}
-  </ul>
+{# Offsets page contents by 110px #}
+<nav class="h-[110px]">
+  {# contain-strict is needed to make the fixed bottom-only inset shadow have proper bounding#}
+  <div class="fixed bg-surfacecontainer h-[110px] w-full flex items-center justify-center contain-strict">
+    {# pointer-events-none is needed to not block clicks as this box is purely visual #}
+    <div class="fixed w-[110%] h-[110%] bottom-[0%] inset-shadow-8px pointer-events-none"></div>
+    <ul class="flex gap-[20px]">
+      {% with label='Home', state='active', link='/' %}
+        {% include 'navbar/button.html' %}
+      {% endwith %}
+      {% with label='Blog', state='unimplemented' %}
+        {% include 'navbar/button.html' %}
+      {% endwith %}
+      {% with label='Portfolio', state='unimplemented'%}
+        {% include 'navbar/button.html' %}
+      {% endwith %}
+    </ul>
+  </div>
 </nav>

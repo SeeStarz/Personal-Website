@@ -1,4 +1,4 @@
-<div class="w-[220px] h-[48px] rounded-[12px] inset-shadow-[inset 8px 8px 8px 8px] shadow-[inset_0px_0px_8px_rgba(0,0,0,0.25)]
+<div class="w-[220px] h-[48px] rounded-[12px] inset-shadow-8px
   {% if state|default('passive') == 'active' %}
     bg-secondarycontainer
   {% elif state|default('passive') == 'passive' %}
@@ -7,15 +7,19 @@
     bg-surfacecontainerhighest
   {% endif %}
 ">
-  <li class="font-bold text-[32px] text-center
-    {% if state|default('passive') == 'active' %}
-      text-onsecondarycontainer
-    {% elif state|default('passive') == 'passive' %}
-      text-onprimarycontainer
-    {% else %}
-      text-onsurfacevariant
-    {% endif %}
-  ">
-    {{ label }}
+  <li>
+    <a {% if link is defined %}href="{{ link }}"{% endif %}>
+      <p class="font-bold text-[32px] text-center
+        {% if state|default('passive') == 'active' %}
+          text-onsecondarycontainer
+        {% elif state|default('passive') == 'passive' %}
+          text-onprimarycontainer
+        {% else %}
+          text-onsurfacevariant opacity-40
+        {% endif %}"
+      >
+        {{ label }}
+      </p>
+    </a>
   </li>
 </div>
