@@ -8,10 +8,10 @@ from sys import stderr
 import shutil
 from jinja2 import Environment, FileSystemLoader, select_autoescape, StrictUndefined
 
-TEMPLATE_RENDER_SOURCE='src/templates/pages/'
-TEMPLATE_DIRS=('src/templates/pages/', 'src/templates/components/')
+TEMPLATE_RENDER_SOURCE='src/templates/pages'
+TEMPLATE_DIRS=('src/templates/pages', 'src/templates/components')
 COPY_DIRS=('src/css',)
-DEST='dist/'
+DEST='dist'
 
 def main():
     locale.setlocale(locale.LC_ALL, 'C')
@@ -20,7 +20,12 @@ def main():
     abs_dir_path = os.path.dirname(abs_file_path)
     os.chdir(abs_dir_path)
 
-    shutil.rmtree(DEST)
+    if path.isdir(DEST):
+        shutil.rmtree(DEST)
+    elif path.isfile(DEST):
+        os.remove(DEST)
+    elif path.islink(DEST):
+        os.unlink(DEST)
     os.mkdir(DEST)
 
     env = Environment(
