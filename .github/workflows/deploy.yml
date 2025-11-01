@@ -38,9 +38,9 @@ jobs:
           ssh-keyscan "${{ vars.SSH_HOST }}" > ~/.ssh/known_hosts
       - name: Clean old files
         run: |
-          ssh "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}" 'rm -rf /var/www/personal/* /var/www/personal/.[!.]* /var/www/..?*'
+          ssh "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}" bash -c 'rm -rf /var/www/personal/* /var/www/personal/.[!.]* /var/www/..?*'
           scp -r dist/* "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}:/var/www/personal/"
       - name: Copy files
         run: |
           scp Caddyfile "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}:/etc/caddy/personal/Caddyfile"
-          ssh "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}" 'sudo systemctl restart caddy.service'
+          ssh "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}" bash -c 'sudo systemctl restart caddy.service'
