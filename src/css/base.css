@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans: "Atkinson Hyperlegible", "Noto Color Emoji";
-  --font-mono: "JetBrains Mono"
+  --font-mono: "Martian Mono"
 }
 
 @utility contain-strict {
