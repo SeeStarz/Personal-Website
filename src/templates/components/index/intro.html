@@ -6,28 +6,15 @@ Welcome!
 {% endblock title %}
 
 {% block content %}
-<div>
-  <img>
-  <div>
-    <p>I'm <span>SeeStarz</span></p>
-    <p>a.k.a <span>Muhammad Fahri Muharram</span></p>
-  </div>
-</div>
-<div>
-  <p>Have I told you that</p>
-  <div>
-    <p>I use</p>
-    <img>
-    <p>BTW</p>
-  </div>
-</div>
+{% include 'index/intro/profile.html' %}
+{% include 'index/intro/archjoke.html' %}
 
 <p>
 I'm a computer science student that tends to do and learn random things for fun, this website is one of them.
 I'm someone that likes to understand how things work, sometimes breaking them in the process, and sometimes reinvent the wheel and make it worse.
 Here's some other things:
 </p>
-<ul>
+<ul class="list-disc pl-[24px]">
   <li>I use arch as a daily driver.</li>
   <li>I like low level things, they're fun.</li>
   <li>I do CTFs sometimes.</li>
@@ -38,5 +25,5 @@ Here's some other things:
   <li>I play video games.</li>
   <li>I suck at design and art.</li>
 </ul>
-<p>Have I mentioned that I use Arch? (btw)</p>
+<p class="italic text-[8px]">Have I mentioned that I use Arch? (btw)</p>
 {% endblock content %}

@@ -10,7 +10,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape, StrictUndef
 
 TEMPLATE_RENDER_SOURCE='src/templates/pages'
 TEMPLATE_DIRS=('src/templates/pages', 'src/templates/components')
-COPY_DIRS=('src/css',)
+COPY_DIRS=('src/css', 'src/img')
 DEST='dist'
 
 def main():
