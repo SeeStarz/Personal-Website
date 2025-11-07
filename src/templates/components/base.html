@@ -26,9 +26,13 @@
     <!-- Extra page specific headers -->
     {% block morehead %}{% endblock %}
   </head>
-  <body class="dark bg-background text-onbackground"> 
-    {% block content %}
-    <p>Sorry, this page seems to be empty.</p>
-    {% endblock content %}
+  <body class="dark bg-background text-onbackground flex flex-col min-h-[100lvh]">
+    {% include 'navbar.html' %}
+    <div class="flex-grow">
+      {% block content %}
+      <p>Sorry, this page seems to be empty.</p>
+      {% endblock content %}
+    </div>
+    {% include 'footer.html' %}
   </body>
 </html>
