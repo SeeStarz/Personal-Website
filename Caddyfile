@@ -1,4 +1,5 @@
 https://seestarz.my.id {
     root * /var/www/personal
     file_server
+    header >Cache-Control no-cache # Make sure css and js are latest, does not prevent caching, only freshness assumptions
 }
