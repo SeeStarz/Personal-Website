@@ -5,32 +5,15 @@
 
  pkgs.mkShellNoCC {
    packages = with pkgs; [
-    python313
-    python313Packages.pip
-    nodejs_24
+    (python313.withPackages (ps: with ps; [ pip jinja2 ]))
+    live-server
+    tailwindcss_4
     git
     hivemind
     inotify-tools
    ];
 
-   shellHook = ''
-     if [ ! -d env ]; then
-       echo "Creating Python virtualenv..."
-       python -m venv env
-       source env/bin/activate
-
-       echo "Installing Python deps..."
-       pip install jinja2
-       pip freeze > requirements.lock
-     else
-       source env/bin/activate
-     fi
-
-     if [ ! -d node_modules ]; then
-       echo "Installing Node deps..."
-       npm install tailwindcss @tailwindcss/cli live-server
-     fi
-
-     export PATH="$(realpath ./node_modules/.bin):$PATH"
-   '';
+  shellHook = ''
+    pip freeze > requirements.lock
+  '';
  }

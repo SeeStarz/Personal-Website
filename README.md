@@ -1,5 +1,7 @@
 # SeeStarz's Website
 Deployment link: <https://seestarz.my.id>
+> [!WARNING]
+> This README page may be slightly (or worse very) incorrect at times. Making proper documentation is tiring especially when I don't even have proper testing in place. Please report any inconsistencies thank you.
 
 ## Table of Contents
 - [SeeStarz's Website](#seestarz-s-website)
@@ -29,14 +31,15 @@ A: Yeah, static site. No good reason to make it dynamic just yet. Probably when 
 Q: Why not `react`?  
 A: I'm a JS hater thank you very much.  
 
-Q: If you're a JS hater, why use `live-server` and `tailwind`?  
-A: Well it's too annoying to find replacements. At least it's install once forget forever.  
+~~Q: If you're a JS hater, why use `live-server` and `tailwind`?~~  
+~~A: Well it's too annoying to find replacements. At least it's install once forget forever.~~  
+Apparently, `live-server` has a rust port and `tailwindcss` has a standalone binary.
 
 Q: Why `jinja2`?  
 A: Well, in my uni I was taught `django`.`jinja2` was pretty similar, so why not? Gets the job done.  
 
 Q: Why `nix`?  
-A: I've been wanting to use `nix` for a while, it's quite overwhelming but a pretty cool concept. The main reason I use `nix` however, is because `npm` sucks so bad, I don't even get virtual environment. `nix` solves this by providing a consistent and isolated environment.  
+A: I've been wanting to use `nix` for a while, it's quite overwhelming but a pretty cool concept. ~~The main reason I use `nix` however, is because `npm` sucks so bad, I don't even get virtual environment. `nix` solves this by providing a consistent and isolated environment.~~ Sunken cost fallacy, I'm already regretting this decision.  
 
 Q: Why not `docker` instead for consistent build environment?  
 A: I may have skill issue here, but `apt-get` shenanigans is just weird, it's also slow if you decide to change any of the installs.  
@@ -128,11 +131,10 @@ nix-shell --pure
 - `inotifywait` loop checks for any changes, and redistribute into `dist` directory.
 - `tailwind` cli monitors changes in any html file, then creates `src/css/compiled.css` with recipe from `src/css/base.css`.
 - `live-server` will serve the pages, and pages will reflect changes without needing a refresh.
-- Unfortunately you have to open the browser manually since `live-server` doesn't seem to know how to open a browser tab inside `nix-shell`.
 
 #### Release Build
-Inside `nix-shell` run `npx @tailwindcss/cli -i src/css/base.css -o src/css/compiled.css -m && ./dist.py`.  
-Alternatively, run `nix-shell --pure --command 'npx @tailwindcss/cli -i src/css/base.css -o src/css/compiled.css && ./dist.py'`
+Inside `nix-shell` run `tailwindcss -i src/css/base.css -o src/css/compiled.css -m && ./dist.py`.  
+Alternatively, run `nix-shell --pure --run 'tailwindcss -i src/css/base.css -o src/css/compiled.css -m && ./dist.py'`
 
 ### Without nix-shell
 #### Prerequisites
@@ -140,44 +142,25 @@ Alternatively, run `nix-shell --pure --command 'npx @tailwindcss/cli -i src/css/
 > These are directly taken from `shell.nix`, and version numbers are taken from inside the shell.
 > You could possibly get away with slightly different versions, no guarantees though.
 - python3 \(3.13.5\)
-- pip \(25.0.1\)
-- npm \(11.6.1\)
+- pip \(well, not really a prerequisite actually, 25.0.1\)
+- jinja2 \(3.1.6\)
+- live-server \(From rust's cargo or node's npm whichever is fine, mine is cargo, 0.10.0\)
+- tailwindcss \(3.4.17\)
 - git \(2.50.1\)
 - hivemind \(1.1.0, can be substituted with anything that can read Procfile\)
 - inotify-tools \(called the same in arch packages, version missing\)
 
 #### Environment Setup
-> [!TIP]
-> These are slightly modified from `shell.nix` to use exact versions instead of installing anything that matches.
-```bash
-if [ ! -d env ]; then
-   echo "Creating Python virtualenv..."
-   python -m venv env
-   source env/bin/activate
-
-   echo "Installing Python deps..."
-   pip install -r requirements.lock
- else
-   source env/bin/activate
- fi
-
- if [ ! -d node_modules ]; then
-   echo "Installing Node deps..."
-   npm ci
- fi
-
- export PATH="$(realpath ./node_modules/.bin):$PATH"
-```
+There's nothing really.
 
 #### Automatic Rebuild
 - Run `hivemind Procfile`, this will run 3 separate commands that monitor changes.
 - `inotifywait` loop checks for any changes, and redistribute into `dist` directory.
 - `tailwind` cli monitors changes in any html file, then creates `src/css/compiled.css` with recipe from `src/css/base.css`.
 - `live-server` will serve the pages, and pages will reflect changes without needing a refresh.
-- `live-server` will also open a tab in your default browser.
 
 #### Release Build
-`npx @tailwindcss/cli -i src/css/base.css -o src/css/compiled.css -m && ./dist.py`
+`tailwindcss -i src/css/base.css -o src/css/compiled.css -m && ./dist.py`
 
 ## Deploying
 - First, build the project as described in [Building](#building)
@@ -188,7 +171,7 @@ if [ ! -d env ]; then
 - Example for deployment can be seen in github actions at `.github/workflows/deploy.yml`
 
 ## Contributing
-Umm no. Well maybe yes, maybe not, you get the gist, this is my personal website after all.
+Documentation issue? Yeah. Bug tracker? Probably, let me finish first though. Feature request? Mmmmm I don't know.
 
 ## License
 This project is released under the MIT license. I'm no lawyer, but in plain english:  
