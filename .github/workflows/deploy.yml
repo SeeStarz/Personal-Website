@@ -14,7 +14,7 @@ jobs:
         uses: cachix/install-nix-action@v31.8.2
       - name: Build project
         run: |
-          nix-shell --pure --command 'npx @tailwindcss/cli -i src/css/base.css -o src/css/compiled.css && ./dist.py'
+          nix-shell --pure --command 'tailwindcss -i src/css/base.css -o src/css/compiled.css -m && ./dist.py'
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
