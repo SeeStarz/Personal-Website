@@ -1,9 +1,12 @@
 {# CONTEXT: provide commit_date, an instance of datetime class as context #}
-<footer class="bg-surfacecontainer h-[110px] w-full flex flex-col items-center justify-center">
+<footer class="bg-surfacecontainer h-[110px] w-full flex flex-col items-center justify-center contain-strict">
   <p class="text-primary font-bold text-[32px] leading-none">
     Last updated: <time datetime="{{ commit_date.year ~ '-' ~ commit_date.month ~ '-' ~ commit_date.day }}">{{ commit_date.strftime('%d %B %Y') }}</time>
   </p>
   <p class="text-[12px]">
     Yes, I'm alive. Still use Arch (btw)
   </p>
+
+  {# pointer-events-none is needed to not block clicks as this box is purely visual #}
+  <div class="fixed w-[110%] h-[110%] top-[0%] inset-shadow-8px pointer-events-none"></div>
 </footer>
