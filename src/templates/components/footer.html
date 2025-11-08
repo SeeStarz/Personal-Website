@@ -1,6 +1,6 @@
 {# CONTEXT: provide commit_date, an instance of datetime class as context #}
 <footer class="bg-surfacecontainer h-[110px] w-full flex flex-col items-center justify-center contain-strict">
-  <p class="text-primary font-bold text-[32px] leading-none">
+  <p class="text-primary text-center font-bold text-[32px] leading-none">
     Last updated: <time datetime="{{ commit_date.year ~ '-' ~ commit_date.month ~ '-' ~ commit_date.day }}">{{ commit_date.strftime('%d %B %Y') }}</time>
   </p>
   <p class="text-[12px]">

@@ -2,7 +2,12 @@
 
 @theme {
   --font-sans: "Atkinson Hyperlegible", "Noto Color Emoji";
-  --font-mono: "Martian Mono"
+  --font-mono: "Martian Mono";
+  --breakpoint-*: initial;
+  --breakpoint-lg: 980px;
+  --breakpoint-md: 740px;
+  --breakpoint-sm: 620px;
+  --breakpoint-xs: 500px;
 }
 
 @utility contain-strict {

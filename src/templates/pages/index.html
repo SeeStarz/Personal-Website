@@ -3,7 +3,18 @@
 
 {% block content %}
 <div class="flex justify-center m-[20px]">
-  <div class="flex w-[940px] gap-[20px]">
+  {# Mobile Layout #}
+  <div class="flex lg:hidden flex-col gap-[20px] max-w-[700px]">
+    {% include 'index/intro.html' %}
+    {% include 'index/hyperlinks.html' %}
+    {% include 'index/pwn.html' %}
+    {% include 'index/system_details.html' %}
+    {% include 'index/recent_games.html' %}
+    {% include 'index/active_projects.html' %}
+  </div>
+
+  {# Desktop Layout #}
+  <div class="hidden lg:flex w-[940px] gap-[20px]">
     <main class="flex flex-col gap-[20px] w-[700px]">
       {% include 'index/intro.html' %}
       {% include 'index/pwn.html' %}

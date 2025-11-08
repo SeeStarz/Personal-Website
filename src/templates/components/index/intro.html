@@ -9,7 +9,7 @@ Welcome!
 {% include 'index/intro/profile.html' %}
 {% include 'index/intro/archjoke.html' %}
 
-<p>
+<p class="mt-[16px] md:mt-0">
 I'm a computer science student that tends to do and learn random things for fun, this website is one of them.
 I'm someone that likes to understand how things work, sometimes breaking them in the process, and sometimes reinvent the wheel and make it worse.
 Here's some other things:
@@ -26,4 +26,8 @@ Here's some other things:
   <li>I suck at design and art.</li>
 </ul>
 <p class="italic text-[8px]">Have I mentioned that I use Arch? (btw)</p>
+
+<div class="lg:hidden bg-errorcontainer rounded-[8px] inset-shadow-8px p-[8px] my-[16px]">
+  <p class="text-onerrorcontainer">This page is intended for desktop view, some decorations may be missing.</p>
+</div>
 {% endblock content %}

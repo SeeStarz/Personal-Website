@@ -1,4 +1,5 @@
-<div class="flex h-[128px] gap-[8px] contain-strict">
+{# Tab/Desktop Layout #}
+<div class="hidden xs:flex h-[128px] gap-[8px] contain-strict">
   <img src="img/profile_picture.jpeg" class="rounded-[999px] border-[4px] border-surfacecontainerhighest">
   <div class="fixed pointer-events-none -z-1 bg-primary h-[60px] w-[360px] border-[4px] border-surfacecontainerhighest rounded-[12px] left-[48px]">
     <p class="text-[24px] text-onprimary relative left-[80px]">I'm <span class="font-bold">SeeStarz</span></p>
@@ -18,4 +19,13 @@
     <div class="fixed -z-1 bg-[#46EAF6] h-[95%] w-[69%] rounded-[12px]"></div>
     <div class="fixed -z-2 bg-onsurface h-[95%] w-full rounded-[12px]"></div>
   </div>
+</div>
+
+{# Mobile Layout #}
+<div class="flex xs:hidden flex-col">
+  <p class="text-[24px] leading-none">I'm <span class="font-bold">SeeStarz</span></p>
+  <p class="text-[16px]">a.k.a <span class="font-bold">Muhammad Fahri Muharram</span></p>
+
+  <p>Here's my profile picture:</p>
+  <img src="img/profile_picture.jpeg" class="w-[80px] h-[80px] rounded-[999px] border-[4px] border-surfacecontainerhighest">
 </div>
