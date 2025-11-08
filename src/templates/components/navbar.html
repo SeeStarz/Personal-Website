@@ -1,10 +1,47 @@
-{# Offsets page contents by 110px #}
-<nav class="h-[110px]">
-  {# contain-strict is needed to make the fixed bottom-only inset shadow have proper bounding#}
-  <div class="fixed bg-surfacecontainer h-[110px] w-full flex items-center justify-center contain-strict z-10">
+{# Offsets page contents by 110px in desktop layout and 48px in mobile layout #}
+<nav class="h-[48px] md:h-[110px]">
+  {# contain-paint is needed to make the fixed bottom-only inset shadow have proper bounding#}
+  <div class="fixed bg-surfacecontainer h-[48px] md:h-[110px] w-full flex flex-col items-center justify-center contain-paint z-10">
     {# pointer-events-none is needed to not block clicks as this box is purely visual #}
-    <div class="fixed w-[110%] h-[110%] bottom-[0%] inset-shadow-8px pointer-events-none"></div>
-    <ul class="flex gap-[20px]">
+    <div class="fixed w-[110%] h-[110%] bottom-[0%] left-[-5%] inset-shadow-8px pointer-events-none"></div>
+
+    <input type="checkbox" name="nav-dropdown" id="nav-dropdown" class="hidden">
+    <label for="nav-dropdown" class="fixed md:hidden right-[8px] top-[8px]">
+      <svg id="nav-menu" class="w-8 h-8 mx-[8px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <svg id="nav-cancel" class="w-8 h-8 mx-[8px] hidden" fill="currentColor" viewBox="-28 0 512 512" xmlns="http://www.w3.org/2000/svg" >
+        <path d="M64 388L196 256 64 124 96 92 228 224 360 92 392 124 260 256 392 388 360 420 228 288 96 420 64 388Z" />
+      </svg>
+    </label>
+
+    {# I'm using explicit style block because we are targeting different element from condition trigger #}
+    <style>
+      #nav-dropdown:checked ~ ul {
+        display: flex;
+        flex-direction: column;
+        margin: 40px;
+      }
+
+      {# Make sure even if viewport is resized we can still close the navbar#}
+      #nav-dropdown:checked ~ label {
+        display: block;
+      }
+
+      #nav-dropdown:checked ~ label > #nav-menu {
+        display: none;
+      }
+
+      #nav-dropdown:checked ~ label > #nav-cancel {
+        display: block;
+      }
+
+      div:has(> #nav-dropdown:checked) {
+        height: auto;
+      }
+    </style>
+
+    <ul class="hidden md:flex gap-[20px]">
       {% with label='Home', state='active', link='/' %}
         {% include 'navbar/button.html' %}
       {% endwith %}
