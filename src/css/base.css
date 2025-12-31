@@ -19,7 +19,7 @@
 }
 
 @utility inset-shadow-8px {
-  box-shadow: inset 0px 0px 8px rgba(0,0,0,0.25);
+  box-shadow: inset 0px 0px 8px rgb(from var(--md-sys-color-on-surface) r g b / 0.25);
 }
 
 @utility center {
