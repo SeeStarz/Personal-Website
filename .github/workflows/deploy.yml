@@ -23,9 +23,9 @@ jobs:
           ssh-keyscan "${{ vars.SSH_HOST }}" > ~/.ssh/known_hosts
       - name: Clean old files
         run: |
-          ssh "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}" "bash -c 'rm -rf /var/www/personal/* /var/www/personal/.[!.]* /var/www/personal/..?*'"
-          scp -r dist/* "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}:/var/www/personal/"
+          ssh "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}" "bash -c 'rm -rf {{ vars.DEPLOY_DIR }}/* {{ vars.DEPLOY_DIR }}/.[!.]* {{ vars.DEPLOY_DIR }}/..?*'"
+          scp -r dist/* "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}:{{ vars.DEPLOY_DIR }}"
       - name: Copy files
         run: |
-          scp Caddyfile "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}:/etc/caddy/personal/Caddyfile"
+          scp Caddyfile "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}:{{ vars.CADDY_PATH }}"
           ssh "${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }}" "bash -c 'sudo systemctl restart caddy.service'"
