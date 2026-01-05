@@ -11,12 +11,10 @@ from collections.abc import Callable
 import math
 from jinja2 import Environment, FileSystemLoader, select_autoescape, StrictUndefined
 
-TEMPLATE_RENDER_SOURCES=('src/templates/pages', 'build/templates/pages')
-TEMPLATE_DIRS=('src/templates/pages', 'src/templates/components', 'build/templates/pages')
-MARKDOWN_SOURCES=('src/md',)
-MARKDOWN_RENDER_MD_SUFFIX='md'
-MARKDOWN_RENDER_TEMPLATES_SUFFIX='templates/pages'
-COPY_DIRS=('src/css', 'src/img', 'build/md')
+TEMPLATE_RENDER_SOURCES=('src/templates/pages',)
+TEMPLATE_DIRS=('src/templates/pages', 'src/templates/components')
+MARKDOWN_SOURCES=('src/markdown',)
+COPY_DIRS=('src/css', 'src/img')
 BUILD_DIR='build'
 DEST='dist'
 
@@ -26,17 +24,15 @@ def main():
     # Make sure current directory is correct relative to script path
     abs_file_path = path.abspath(__file__)
     abs_dir_path = path.dirname(abs_file_path)
-    os.chdir(abs_dir_path)
+    os.chdir(abs_dir_path + '/..')
 
     if path.isfile(DEST):
         print(f'Destination {DEST} is a file', file=stderr)
         exit(1)
 
     def run():
-        markdown_artifacts = render_markdowns(MARKDOWN_SOURCES, BUILD_DIR)
-        remove_unknown(known_paths=markdown_artifacts, DEST)
-
         context = add_context_commit_date(context={})
+        # markdown_pages = render_markdowns(MARKDOWN_SOURCES, BUILD_DIR)
         static_pages = render_templates(context, sources=TEMPLATE_RENDER_SOURCES, DEST)
         assets = copy_static(COPY_DIRS, DEST)
         remove_unknown(known_paths=static_pages + assets, DEST)
@@ -69,54 +65,15 @@ def create_default_env() -> Environment:
     )
 
 
-def render_markdowns(context: dict, sources: list[str], dest: str) -> list[str]:
-    """
-    Render custom markdowns in sources directories into html and post-processed markdown
-    Each markdown source will be rendered with a content table and have custom header removed
-    Each markdown source will also be rendered into html templates with variables embedded so it can be rendered directly
-
-    Returns paths to file that has been rendered
-    """
-    artifacts = []
-    for top_level in sources:
-        for root, _subdirs, files in os.walk(top_level): # e.g. src/md
-            for file in files:
-                if not file.endswith('.md'):
-                    print('Expected markdown, got: {}/{}'.format(root, file), file=stderr)
-                    exit(1)
-                src_path = path.join(root, file) # e.g. src/md/1.md
-                rel_path = path.relpath(src_path, top_level) # e.g. 1.md
-
-                def t():
-                    template_export_path = path.join(dest, MARKDOWN_RENDER_TEMPLATES_SUFFIX, rel_path) # e.g. build/templates/pages/1.md
-                    template_export_path = template_export_path.removesuffix('.md') + '.html' # e.g. build/templates/pages/1.html
-                    template_export_dir = path.dirname(template_export_path) # e.g. build/templates/pages
-                    os.makedirs(template_export_dir, exist_ok=True)
-
-                def m():
-                    markdown_export_path = path.join(dest, MARKDOWN_RENDER_TEMPLATES_SUFFIX, rel_path) # e.g. build/md/1.md
-                    markdown_export_dir = path.dirname(markdown_export_path) # e.g. build/md
-                    os.makedirs(markdown_export_dir, exist_ok=True)
-
-                t()
-                m()
-
-
-
 def render_templates(context: dict, sources: list[str], dest: str) -> list[str]:
     """
-    Render templates in sources directories with the given context to dest directory
-
-    Returns paths to file that has been rendered
+    Recursively render templates in sources directories with the given context to dest directory
     """
     env = create_default_env()
     templates = []
     for top_level in sources:
         for root, _subdirs, files in os.walk(top_level): # e.g. src/templates/pages
             for file in files:
-                if not file.endswith('.html'):
-                    print('Expected html, got: {}/{}'.format(root, file), file=stderr)
-                    exit(1)
                 src_path = path.join(root, file) # e.g. src/templates/pages/index.html
                 rel_path = path.relpath(src_path, top_level) # e.g. index.html
                 template = env.get_template(rel_path)
@@ -133,19 +90,16 @@ def render_templates(context: dict, sources: list[str], dest: str) -> list[str]:
 
 def copy_static(copy_dirs: list[str], dest: str) -> list[str]:
     """
-    Copy files from copy_dirs directories to dest directory
-    Preserves only last parent directory name
-
-    Returns paths to file that has been copied
+    Recursively copy files from copy_dirs directories to dest directory
     """
     statics = []
-    for top_level in copy_dirs: # dir_ e.g. src/css/
-        rel_dir = path.split(top_level)[-1] # e.g. css/
+    for dir_ in copy_dirs: # dir_ e.g. src/css/
+        rel_dir = path.split(dir_)[-1] # e.g. css/
         export_dir = path.join(dest, rel_dir) # e.g. dist/css/
-        for root, _subdirs, files in os.walk(top_level):
+        for root, _subdirs, files in os.walk(dir_):
             for file in files:
                 src_path = path.join(root, file) # e.g. src/css/compiled.css
-                rel_path = path.relpath(src_path, top_level) # e.g. compiled.css
+                rel_path = path.relpath(src_path, dir_) # e.g. compiled.css
                 export_path = path.join(export_dir, rel_path) # e.g. dist/css/compiled.css
                 export_dir = path.dirname(export_path) # e.g. dist/css/
                 os.makedirs(export_dir, exist_ok=True)
