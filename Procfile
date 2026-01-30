@@ -1,3 +1,3 @@
-tailwind: tailwindcss -i src/css/base.css -o src/css/compiled.css --watch
+tailwind: tailwindcss -i src/data/css/base.css -o src/data/css/compiled.css --watch
 live-server: cd dist; live-server --port 8080 --host localhost
-builder: while inotifywait -rq -e modify -e create -e delete src; do ./dist.py; done
+builder: src/script/dist.py; while inotifywait -rq -e modify -e create -e delete src; do src/script/dist.py; done
